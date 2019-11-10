@@ -4,6 +4,7 @@ build citation graph from paper meta csv
 
 import csv
 import json
+import random
 
 
 def extract_title_from_ref(ref: str) -> str:
@@ -31,6 +32,8 @@ def build_graph(csv_fn_1: str, csv_fn_2: str, json_fn: str):
         with open(csv_fn, 'r') as f:
             reader = csv.reader(f)
             for row in reader:
+                if random.random() > 0.1:
+                    continue
                 title = row[1]
                 titles.add(title)
                 ref_str = row[23]
