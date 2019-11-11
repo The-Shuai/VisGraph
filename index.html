@@ -30,9 +30,7 @@ d3.json("data.json", function(error, graph) {
       .attr("class", "links")
     .selectAll("line")
     .data(graph.edges)
-    .enter().append("line")
-      .attr("stroke", 0x999)
-      .attr("stroke-width", 0.6);
+    .enter().append("line");
   var node = svg.append("g")
       .attr("class", "nodes")
     .selectAll("g")
