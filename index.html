@@ -26,10 +26,10 @@ var line_width = 1, node_r = 5,
 var line_color = "grey", node_color = 0x666, 
     highlight_line_color = "blue", highlight_node_color = "blue";
 var simulation = d3.forceSimulation()
-    .force("link", d3.forceLink().id(function(d) { return d.title; }))
+    .force("link", d3.forceLink().id(function(d) { return d.name; }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
-d3.json("data.json", function(error, graph) {
+d3.json("coauthor.json", function(error, graph) {
   if (error) throw error;
   var link = svg.append("g")
       .attr("class", "links")
@@ -45,7 +45,7 @@ d3.json("data.json", function(error, graph) {
     .enter().append("g");
   var labels = node.append("text")
     .text(function(d) {
-      return d.title;
+      return d.name;
     })
     .attr('x', 6)
     .attr('y', 3)
@@ -62,11 +62,11 @@ d3.json("data.json", function(error, graph) {
           .attr("fill", highlight_node_color)
           .attr("r", highlight_node_r); 
         link.attr("stroke", function(o) {
-          return o.source.title == d.title || o.target.title == d.title?
+          return o.source.name == d.name || o.target.name == d.name?
             highlight_line_color: line_color;
         })
           .attr("stroke-width", function(o) {
-            return o.source.title == d.title || o.target.title == d.title?
+            return o.source.name == d.name || o.target.name == d.name?
               highlight_line_width: line_width;
         });
         labels.style("visibility", function(o, j) {
