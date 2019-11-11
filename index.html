@@ -14,8 +14,8 @@ text {
   font-size: 10px;
 }
 </style>
-<svg width="9000" height="9000"></svg>
-<!-- <svg width="400" height="400"></svg> -->
+<!--<svg width="9000" height="9000"></svg>-->
+ <svg width="400" height="400"></svg>
  <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 var svg = d3.select("svg"),
@@ -29,7 +29,7 @@ var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.name; }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
-d3.json("coauthor.json", function(error, graph) {
+d3.json("test.json", function(error, graph) {
   if (error) throw error;
   var link = svg.append("g")
       .attr("class", "links")
@@ -43,7 +43,7 @@ d3.json("coauthor.json", function(error, graph) {
     .selectAll("g")
     .data(graph.nodes)
     .enter().append("g");
-  var labels = node.append("text")
+  var node_label = node.append("text")
     .text(function(d) {
       return d.name;
     })
@@ -62,24 +62,24 @@ d3.json("coauthor.json", function(error, graph) {
           .attr("fill", highlight_node_color)
           .attr("r", highlight_node_r); 
         link.attr("stroke", function(o) {
-          return o.source.name == d.name || o.target.name == d.name?
+          return o.source.name === d.name || o.target.name === d.name?
             highlight_line_color: line_color;
         })
           .attr("stroke-width", function(o) {
-            return o.source.name == d.name || o.target.name == d.name?
+            return o.source.name === d.name || o.target.name === d.name?
               highlight_line_width: line_width;
         });
-        labels.style("visibility", function(o, j) {
-          return i == j? "visible": "hidden" ; 
+        node_label.style("visibility", function(o, j) {
+          return i === j? "visible": "hidden" ;
         });
       })
-      .on("mouseout", function(d) { 
+      .on("mouseout", function() {
         d3.select(this)
           .attr("fill", node_color)
           .attr("r", node_r); 
         link.attr("stroke", line_color)
           .attr("stroke-width", line_width); 
-        labels.style("visibility", "hidden");
+        node_label.style("visibility", "hidden");
       });
   simulation
       .nodes(graph.nodes)
