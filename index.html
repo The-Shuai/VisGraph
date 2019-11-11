@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <style>
 .links line {
-    stroke: #999;
+    /* stroke: #999; */
     stroke-opacity: 0.6;
 }
 .nodes circle {
@@ -14,23 +14,30 @@ text {
   font-size: 10px;
 }
 </style>
-<svg width="9000" height="9000"></svg>
+<!-- <svg width="9000" height="9000"></svg> -->
+<svg width="400" height="400"></svg>
  <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
+var line_width = 1, node_r = 5,
+    highlight_line_width = 2, highlight_node_r = 10;
+var line_color = "grey", node_color = 0x666, 
+    highlight_line_color = "blue", highlight_node_color = "blue";
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.title; }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
-d3.json("data.json", function(error, graph) {
+d3.json("test.json", function(error, graph) {
   if (error) throw error;
   var link = svg.append("g")
       .attr("class", "links")
     .selectAll("line")
     .data(graph.edges)
-    .enter().append("line");
+    .enter().append("line")
+      .attr("stroke", line_color)
+      .attr("stroke-width", line_width);
   var node = svg.append("g")
       .attr("class", "nodes")
     .selectAll("g")
@@ -38,12 +45,32 @@ d3.json("data.json", function(error, graph) {
     .enter().append("g");
 
   var circles = node.append("circle")
-      .attr("r", 5)
-      .attr("fill", "steelblue")
+      .attr("r", node_r)
+      .attr("fill", node_color)
       .call(d3.drag()
           .on("start", dragstarted)
           .on("drag", dragged)
-          .on("end", dragended));
+          .on("end", dragended))
+      .on("mouseover", function(d) { 
+        d3.select(this)
+          .attr("fill", highlight_node_color)
+          .attr("r", highlight_node_r); 
+        link.attr("stroke", function(o) {
+          return o.source.title == d.title || o.target.title == d.title?
+            highlight_line_color: line_color;
+        })
+          .attr("stroke-width", function(o) {
+            return o.source.title == d.title || o.target.title == d.title?
+              highlight_line_width: line_width;
+          });
+      })
+      .on("mouseout", function(d) { 
+        d3.select(this)
+          .attr("fill", node_color)
+          .attr("r", node_r); 
+        link.attr("stroke", line_color)
+          .attr("stroke-width", line_width); 
+      });
   // var labels = node.append("text")
   //     .text(function(d) {
   //       return d.title;
@@ -69,15 +96,18 @@ d3.json("data.json", function(error, graph) {
         })
   }
 });
+
 function dragstarted(d) {
   if (!d3.event.active) simulation.alphaTarget(0.3).restart();
   d.fx = d.x;
   d.fy = d.y;
 }
+
 function dragged(d) {
   d.fx = d3.event.x;
   d.fy = d3.event.y;
 }
+
 function dragended(d) {
   if (!d3.event.active) simulation.alphaTarget(0);
   d.fx = null;
