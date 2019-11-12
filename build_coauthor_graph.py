@@ -11,7 +11,9 @@ def floyd(nodes: list, dist_dict: typing.Dict) -> typing.List:
     """
     compute all-to-all shortest path by floyd algorithm
     :param dist_dict: {(src, dst): distance}
-    :return: shortest_path: list of {"source": src, "target": dst, "path": [edge_0, edge_1, ..., edge_p]}, edge_i: {"source": src_i, "target": dst_i}
+    :return: shortest_path: list of {"source": src, "target": dst, 
+    "node_path": [{"name": name}],
+    "edge_path": [edge_0, edge_1, ..., edge_p]}, edge_i: {"source": src_i, "target": dst_i}
     """
     MAX_LENGTH = float(len(nodes))
     path_dict = dict()                  # {(src, dst): shortest_path_next_hop_node_from_src}
@@ -35,12 +37,12 @@ def floyd(nodes: list, dist_dict: typing.Dict) -> typing.List:
     for i in range(1, len(nodes)):
         for j in range(i):
             src, dst = min(nodes[j], nodes[i]), max(nodes[j], nodes[i])
-            tmp = {"source": src, "target": dst, "node_path": list((src,)), "edge_path": list()}
+            tmp = {"source": src, "target": dst, "node_path": list(({"name": src},)), "edge_path": list()}
             ptr = src
             while ptr != dst:
                 pre = ptr
                 ptr = path_dict[(ptr, dst)]
-                tmp["node_path"].append(ptr)
+                tmp["node_path"].append({"name": ptr})
                 tmp["edge_path"].append({"source": pre, "target": ptr})
             shortest_path.append(tmp)
     return shortest_path

@@ -37,5 +37,32 @@
     {"name": 10},
     {"name": 11},
     {"name": 12},
-    {"name": 13}]
+    {"name": 13}],
+  "shortest_path": [
+    {"source": 0, "target": 1, "node_path": [{"name": 0}, {"name": 2}, {"name": 1}], "edge_path": [{"source": 0, "target": 2}, {"source": 2, "target": 1}]},
+    {"source": 0, "target": 2, "node_path": [{"name": 0}, {"name": 3}, {"name": 2}], "edge_path": [{"source": 0, "target": 3}, {"source": 3, "target": 3}]},
+    {"source": 0, "target": 3, "node_path": [{"name": 0}, {"name": 4}, {"name": 3}], "edge_path": [{"source": 0, "target": 4}, {"source": 4, "target": 3}]},
+    {"source": 0, "target": 4, "node_path": [{"name": 0}, {"name": 5}, {"name": 4}], "edge_path": [{"source": 0, "target": 5}, {"source": 5, "target": 4}]},
+    {"source": 0, "target": 5, "node_path": [{"name": 0}, {"name": 6}, {"name": 5}], "edge_path": [{"source": 0, "target": 6}, {"source": 6, "target": 5}]},
+    {"source": 0, "target": 6, "node_path": [{"name": 0}, {"name": 7}, {"name": 6}], "edge_path": [{"source": 0, "target": 7}, {"source": 7, "target": 6}]},
+    {"source": 0, "target": 7, "node_path": [{"name": 0}, {"name": 8}, {"name": 7}], "edge_path": [{"source": 0, "target": 8}, {"source": 8, "target": 7}]},
+    {"source": 0, "target": 8, "node_path": [{"name": 0}, {"name": 9}, {"name": 8}], "edge_path": [{"source": 0, "target": 9}, {"source": 9, "target": 8}]},
+    {"source": 0, "target": 9, "node_path": [{"name": 0}, {"name": 10}, {"name": 9}], "edge_path": [{"source": 0, "target": 10}, {"source": 10, "target": 9}]},
+    {"source": 0, "target": 10, "node_path": [{"name": 0}, {"name": 11}, {"name": 10}], "edge_path": [{"source": 0, "target": 11}, {"source": 11, "target": 10}]},
+    {"source": 0, "target": 11, "node_path": [{"name": 0}, {"name": 12}, {"name": 11}], "edge_path": [{"source": 0, "target": 12}, {"source": 12, "target": 11}]},
+    {"source": 0, "target": 12, "node_path": [{"name": 0}, {"name": 13}, {"name": 12}], "edge_path": [{"source": 0, "target": 13}, {"source": 13, "target": 12}]},
+    {"source": 0, "target": 13, "node_path": [{"name": 0}, {"name": 2}, {"name": 13}], "edge_path": [{"source": 0, "target": 2}, {"source": 2, "target": 13}]},
+    {"source": 1, "target": 2, "node_path": [{"name": 1}, {"name": 3}, {"name": 2}], "edge_path": [{"source": 1, "target": 3}, {"source": 3, "target": 2}]},
+    {"source": 1, "target": 3, "node_path": [{"name": 1}, {"name": 4}, {"name": 3}], "edge_path": [{"source": 1, "target": 4}, {"source": 4, "target": 3}]},
+    {"source": 1, "target": 4, "node_path": [{"name": 1}, {"name": 5}, {"name": 4}], "edge_path": [{"source": 1, "target": 5}, {"source": 5, "target": 4}]},
+    {"source": 1, "target": 5, "node_path": [{"name": 1}, {"name": 6}, {"name": 5}], "edge_path": [{"source": 1, "target": 6}, {"source": 6, "target": 5}]},
+    {"source": 1, "target": 6, "node_path": [{"name": 1}, {"name": 7}, {"name": 6}], "edge_path": [{"source": 1, "target": 7}, {"source": 7, "target": 6}]},
+    {"source": 1, "target": 7, "node_path": [{"name": 1}, {"name": 8}, {"name": 7}], "edge_path": [{"source": 1, "target": 8}, {"source": 8, "target": 7}]},
+    {"source": 1, "target": 8, "node_path": [{"name": 1}, {"name": 9}, {"name": 8}], "edge_path": [{"source": 1, "target": 9}, {"source": 9, "target": 8}]},
+    {"source": 1, "target": 9, "node_path": [{"name": 1}, {"name": 10}, {"name": 9}], "edge_path": [{"source": 1, "target": 10}, {"source": 10, "target": 9}]},
+    {"source": 1, "target": 10, "node_path": [{"name": 1}, {"name": 11}, {"name": 10}], "edge_path": [{"source": 1, "target": 11}, {"source": 11, "target": 10}]},
+    {"source": 1, "target": 11, "node_path": [{"name": 1}, {"name": 12}, {"name": 11}], "edge_path": [{"source": 1, "target": 12}, {"source": 12, "target": 11}]},
+    {"source": 1, "target": 12, "node_path": [{"name": 1}, {"name": 13}, {"name": 12}], "edge_path": [{"source": 1, "target": 13}, {"source": 13, "target": 12}]},
+    {"source": 1, "target": 13, "node_path": [{"name": 1}, {"name": 2}, {"name": 13}], "edge_path": [{"source": 1, "target": 2}, {"source": 2, "target": 13}]}
+  ]
 }
