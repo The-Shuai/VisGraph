@@ -35,12 +35,13 @@ def floyd(nodes: list, dist_dict: typing.Dict) -> typing.List:
     for i in range(1, len(nodes)):
         for j in range(i):
             src, dst = min(nodes[j], nodes[i]), max(nodes[j], nodes[i])
-            tmp = {"source": src, "target": dst, "path": list()}
+            tmp = {"source": src, "target": dst, "node_path": list((src,)), "edge_path": list()}
             ptr = src
             while ptr != dst:
                 pre = ptr
                 ptr = path_dict[(ptr, dst)]
-                tmp["path"].append({"source": pre, "target": ptr})
+                tmp["node_path"].append(ptr)
+                tmp["edge_path"].append({"source": pre, "target": ptr})
             shortest_path.append(tmp)
     return shortest_path
 
