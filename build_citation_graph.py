@@ -56,4 +56,4 @@ def build_graph(csv_fn_1: str, csv_fn_2: str, json_fn: str) -> typing.Dict:
 if __name__ == '__main__':
     with open('config.json', 'r') as f:
         config = json.load(f)
-    graph = build_graph(config['data_file_1'], config['data_file_2'], 'citation.json')
+    graph = build_graph(config['mac_data_file_1'], config['mac_data_file_2'], 'citation.json')

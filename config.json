@@ -1,3 +1,5 @@
-{"data_file_1": "/home/yuxuanwei/dataset/VisDatasets/scopus_visual_analytics_part1.csv",
-"data_file_2": "/home/yuxuanwei/dataset/VisDatasets/scopus_visual_analytics_part2.csv"
+{"linux_data_file_1": "/home/yuxuanwei/dataset/VisDatasets/scopus_visual_analytics_part1.csv",
+"linux_data_file_2": "/home/yuxuanwei/dataset/VisDatasets/scopus_visual_analytics_part2.csv",
+"mac_data_file_1": "/Users/weiyuxuan/Documents/workspace/VisCourse2019/dataset/scopus_visual_analytics_part1.csv",
+"mac_data_file_2": "/Users/weiyuxuan/Documents/workspace/VisCourse2019/dataset/scopus_visual_analytics_part2.csv"
 }
