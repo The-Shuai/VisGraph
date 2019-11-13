@@ -39,7 +39,7 @@
     {"name": 12},
     {"name": 13}],
   "shortest_path": [
-    {"source": 0, "target": 1, "node_path": [{"name": 0}, {"name": 2}, {"name": 1}], "edge_path": [{"source": 0, "target": 2}, {"source": 2, "target": 1}]},
+    {"source": 0, "target": 1, "node_path": [{"name": 0}, {"name": 4}, {"name": 1}], "edge_path": [{"source": 0, "target": 4}, {"source": 4, "target": 1}]},
     {"source": 0, "target": 2, "node_path": [{"name": 0}, {"name": 3}, {"name": 2}], "edge_path": [{"source": 0, "target": 3}, {"source": 3, "target": 3}]},
     {"source": 0, "target": 3, "node_path": [{"name": 0}, {"name": 4}, {"name": 3}], "edge_path": [{"source": 0, "target": 4}, {"source": 4, "target": 3}]},
     {"source": 0, "target": 4, "node_path": [{"name": 0}, {"name": 5}, {"name": 4}], "edge_path": [{"source": 0, "target": 5}, {"source": 5, "target": 4}]},

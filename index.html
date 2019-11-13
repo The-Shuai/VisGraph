@@ -23,13 +23,16 @@ var svg = d3.select("svg"),
 var line_width = 1, node_r = 5,
     highlight_line_width = 2, highlight_node_r = 7;
 var line_color = "grey", node_color = 0x666, 
-    highlight_line_color = "blue", highlight_node_color = "blue";
+    highlight_line_color = "blue", highlight_node_color = "blue",
+    shortest_path_node_color = "Teal", shortest_path_line_color = "Teal";
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.name; }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 d3.json("test.json", function(error, graph) {
   if (error) throw error;
+  var sp_src = "", sp_dst = "";         // shortest path source and destination node, by default empty
+
   var link = svg.append("g")
       .attr("class", "links")
     .selectAll("line")
@@ -58,11 +61,13 @@ d3.json("test.json", function(error, graph) {
           .on("end", dragended))
       .on("mouseover", function(d, i) { 
         d3.select(this)
-          .attr("fill", highlight_node_color)
-          .attr("r", highlight_node_r); 
-        link.attr("stroke", function(o) {
-          return o.source.name === d.name || o.target.name === d.name?
-            highlight_line_color: line_color;
+          .attr("fill", function() {
+           return d3.select(this).attr("fill") === shortest_path_node_color? shortest_path_node_color: highlight_node_color;
+          })
+          .attr("r", highlight_node_r);
+        link.attr("stroke", function(o, i) {
+          return link._groups[0][i].attributes[0].nodeValue === shortest_path_line_color? shortest_path_line_color:
+                  (o.source.name === d.name || o.target.name === d.name? highlight_line_color: line_color);
         })
           .attr("stroke-width", function(o) {
             return o.source.name === d.name || o.target.name === d.name?
@@ -74,12 +79,37 @@ d3.json("test.json", function(error, graph) {
       })
       .on("mouseout", function() {
         d3.select(this)
-          .attr("fill", node_color)
+          .attr("fill", function () {
+            return d3.select(this).attr("fill") === shortest_path_node_color? shortest_path_node_color: node_color;
+          })
           .attr("r", node_r); 
-        link.attr("stroke", line_color)
+        link.attr("stroke", function(o, i) {
+         return link._groups[0][i].attributes[0].nodeValue === shortest_path_line_color? shortest_path_line_color: line_color;
+        })
           .attr("stroke-width", line_width); 
         node_label.style("visibility", "hidden");
-      });
+      })
+          .on("click", function(d) {
+           sp_src = sp_dst;
+           sp_dst = d.name;
+           if (sp_src === "" || sp_dst === "" || sp_src === sp_dst) {
+            return;
+           }
+           console.log(sp_src + " " + sp_dst);
+           var path = null;
+           for (var idx=0, len=graph.shortest_path.length; idx<len; ++idx) {
+            path = graph.shortest_path[idx];
+            if (path.source === (sp_src < sp_dst? sp_src: sp_dst) && path.target === (sp_src < sp_dst? sp_dst: sp_src)) {
+             break;
+            }
+           }
+           circles.attr("fill", function(o) {
+            return isInNodePath(o.name, path.node_path)? shortest_path_node_color: node_color;
+           });
+           link.attr("stroke", function(o) {
+            return isInEdgePath(o.source.name, o.target.name, path.edge_path)? shortest_path_line_color: line_color;
+           });
+          });
   simulation
       .nodes(graph.nodes)
       .on("tick", ticked);
@@ -113,5 +143,23 @@ function dragended(d) {
   if (!d3.event.active) simulation.alphaTarget(0);
   d.fx = null;
   d.fy = null;
+}
+
+function isInNodePath(node, node_path) {
+ for (var idx = 0, len = node_path.length; idx < len; ++idx) {
+  if (node_path[idx].name === node) {
+   return true;
+  }
+ }
+ return false;
+}
+
+function isInEdgePath(src, dst, edge_path) {
+ for (var idx = 0, len = edge_path.length; idx < len; ++idx) {
+  if ((edge_path[idx].source === src && edge_path[idx].target === dst) || (edge_path[idx].source === dst && edge_path[idx].target === src)) {
+   return true;
+  }
+ }
+ return false;
 }
 </script>
