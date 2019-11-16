@@ -10,6 +10,7 @@ where nodes represent papers and edges represent citation links
 where nodes represent paper authors and edges represent coauthor links
 - `citation.json`: citation graph json file, with pre-computed shortest paths
 - `coauthor.json`: coauthor graph json file, with pre-computed shortest paths
+- `config.json`: csv file path configuration file
 - `index.html`: visualization and interaction by `d3.js`
 - `scopus_visual_analytics_part1.csv`, `scopus_visual_analytics_part2.csv`: paper meta source file
 - `test.json`: small-scale dataset for visualization algorithm testing
