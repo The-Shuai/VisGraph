@@ -15,7 +15,8 @@ where nodes represent paper authors and edges represent coauthor links
 - `test.json`: small-scale dataset for visualization algorithm testing
 ## Instructions
 - Loading data and rendering graphs may take a while
-- When the mouse hovers on the node, the node and the edges concerning with the nodes is highlighted with color `blue`
+- When the mouse hovers on the node, the node and the edges concerning with the nodes is highlighted with color `blue` 
+and the name of the node appears
 - When clicking two connected nodes, the shortest path between these two nodes is highlighted with color `red`
 
 ![VisGraph](VisGraph.png)
